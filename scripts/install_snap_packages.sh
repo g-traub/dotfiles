@@ -1,4 +1,6 @@
 #!/bin/sh
-PACKAGES="postman datagrip vlc spotify todoist"
+PACKAGES="postman vlc todoist"
+CLASSIC_PACKAGES="datagrip"
 
 snap install $PACKAGES
+snap install $CLASSIC_PACKAGES --classic
