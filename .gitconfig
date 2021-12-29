@@ -1,0 +1,7 @@
+[user]
+	email = 33841027+g-traub@users.noreply.github.com 
+	name = Guillaume Traub
+[alias]
+	s = status
+[pull]
+	rebase = true
