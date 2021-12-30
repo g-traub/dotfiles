@@ -9,6 +9,12 @@ gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
 # @TODO: check it's not already installed
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# add autosuggestions plugin
+git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/custom/plugins/zsh-autosuggestions"
+
+# add highlighting plugin
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH/custom/plugins/zsh-syntax-highlighting"
+
 # install spaceship-prompt
 # @TODO: check it's not already installed
 git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt" --depth=1
