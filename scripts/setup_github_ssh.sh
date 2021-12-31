@@ -4,6 +4,8 @@ key_name=$1
 key_comment=$2
 key_passphrase=$3
 
+set -e # exit on errors
+
 if [ -z $key_name ] || [ -z $key_comment ] || [ -z $key_passphrase ]; then
   echo "Missing argument(s). Provide key name, key comment and key passphrase"
   exit 1
