@@ -4,6 +4,11 @@ key_name=$1
 key_comment=$2
 key_passphrase=$3
 
+if [ -z $key_name ] || [ -z $key_comment ] || [ -z $key_passphrase ]; then
+  echo "Missing argument(s). Provide key name, key comment and key passphrase"
+  exit 1
+fi
+
 # create ssh key
 if ! [ -e "$SSH_DIR/$key_name" ]; then
   ssh-keygen -q -t ed25519 -C $key_comment -f "$SSH_DIR/$key_name" -N $key_passphrase
