@@ -1,14 +1,25 @@
-#!/bin/sh
-echo "setup github ssh"
+#!/bin/bash
+SSH_DIR="$HOME/.ssh"
+key_name=$1
+key_comment=$2
+key_passphrase=$3
 
-# create ssh key (keep the default)
-if ! [ -e ~/.ssh/id_ed25519 ]; then
-  ssh-keygen -t ed25519 -C "g-traub"
+# create ssh key
+if ! [ -e "$SSH_DIR/$key_name" ]; then
+  ssh-keygen -q -t ed25519 -C $key_comment -f "$SSH_DIR/$key_name" -N $key_passphrase
 fi
 
 # add it to ssh-agent
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+expect <<EOF
+  spawn ssh-add "$SSH_DIR/$key_name"
+  expect "Enter passphrase for $SSH_DIR/$key_name:"
+  send "$key_passphrase\r"
+  expect eof
+EOF
 
-# login to gh CLI (login with newly created SSH key)
-gh auth login
+# login to gh CLI
+gh auth login -s admin:public_key --web
+
+# add ssh key
+gh ssh-key add "$SSH_DIR/$key_name.pub"
