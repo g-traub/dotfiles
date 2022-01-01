@@ -1,5 +1,5 @@
 #!/bin/sh
-PACKAGES="code terminator vim yarn htop firefox chromium-browser curl zsh spotify-client fonts-powerline"
+PACKAGES="code terminator vim yarn htop firefox chromium-browser curl zsh spotify-client fonts-powerline expect"
 
 apt-get update
 apt-get install $PACKAGES -y
