@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -e # exit on errors
+
 # set terminator as default terminal
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
 gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
@@ -24,5 +27,5 @@ ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/the
 # set zsh as default shell
 chsh -s $(which zsh)
 
-# reload terminal
-exec zsh
+# reload config
+source "$HOME/.zshrc"
