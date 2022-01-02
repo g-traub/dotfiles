@@ -2,26 +2,33 @@
 
 set -e # exit on errors
 
+ZSH_PLUGINS_DIR="$ZSH/custom/plugins"
+ZSH_THEMES_DIR="$ZSH/custom/themes"
+
 # set terminator as default terminal
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
 gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
 
-# @TODO: check that zsh is installed
-
 # install oh-my-zsh
-# @TODO: check it's not already installed
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if ! [ -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
 # add autosuggestions plugin
-git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/custom/plugins/zsh-autosuggestions"
+if ! [ -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_PLUGINS_DIR/zsh-autosuggestions"
+fi
 
 # add highlighting plugin
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH/custom/plugins/zsh-syntax-highlighting"
+if ! [ -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting"
+fi
 
 # install spaceship-prompt
-# @TODO: check it's not already installed
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH/custom/themes/spaceship-prompt" --depth=1
-ln -s "$ZSH/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/custom/themes/spaceship.zsh-theme"
+if ! [ -d "$ZSH_THEMES_DIR/spaceship-prompt" ]; then
+  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_THEMES_DIR/spaceship-prompt" --depth=1
+  ln -s "$ZSH_THEMES_DIR/spaceship-prompt/spaceship.zsh-theme" "$ZSH_THEMES_DIR/spaceship.zsh-theme"
+fi
 # NB: theme is already selected in .zshrc
 
 # set zsh as default shell
