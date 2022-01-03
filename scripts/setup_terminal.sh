@@ -34,6 +34,3 @@ fi
 
 # set zsh as default shell
 chsh -s $(which zsh)
-
-# reload config
-source "$HOME/.zshrc"
