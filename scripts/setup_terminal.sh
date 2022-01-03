@@ -2,8 +2,9 @@
 
 set -e # exit on errors
 
-ZSH_PLUGINS_DIR="$ZSH/custom/plugins"
-ZSH_THEMES_DIR="$ZSH/custom/themes"
+ZSH_DIR="${ZSH:-"$HOME/.oh-my-zsh"}"
+ZSH_PLUGINS_DIR="$ZSH_DIR/custom/plugins"
+ZSH_THEMES_DIR="$ZSH_DIR/custom/themes"
 
 # set terminator as default terminal
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
